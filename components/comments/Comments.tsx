@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { commentsFetcher } from "@/helpers/utils";
 import { Comment } from "@/types";
 
-const Comments = ({ postSlug }: { postSlug: string }) => {
+const Comments = ({ postSlug, locale }: { postSlug: string; locale: string }) => {
   const { status } = useSession();
   const { data, mutate, isLoading } = useSWR(`/api/comments?postSlug=${postSlug}`, commentsFetcher);
 
@@ -40,7 +40,9 @@ const Comments = ({ postSlug }: { postSlug: string }) => {
         <div className="space-y-4">
           {isLoading
             ? "Loading comments..."
-            : typedComments?.map((comment) => <SingleComment key={comment.id} comment={comment} />)}
+            : typedComments?.map((comment) => (
+                <SingleComment locale={locale} key={comment.id} comment={comment} />
+              ))}
         </div>
       )}
     </div>

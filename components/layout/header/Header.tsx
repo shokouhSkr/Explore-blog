@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Container, ThemeToggle, LangSwitcher, AuthLinks } from "../..";
 import { MoreVertical } from "lucide-react";
 
-const Navigation = () => {
+const Header = ({ locale, dictionary }: { locale: string; dictionary: any }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -18,10 +18,10 @@ const Navigation = () => {
           <div className="flex-between py-5">
             {/* LOGO */}
             <div className="flex items-center gap-3">
-              <Link href="/" className="font-bold text-lg">
+              <Link href={`/${locale}`} className="font-bold text-lg">
                 Explorer
               </Link>
-              <LangSwitcher />
+              <LangSwitcher locale={locale} />
             </div>
 
             {/* THEME TOGGLE AND LINKS */}
@@ -45,34 +45,39 @@ const Navigation = () => {
                 >
                   <li>
                     <Link
-                      href="/contact"
+                      href={`/${locale}/contact`}
                       onClick={() => setIsOpen(false)}
                       className="w-full pl-4 py-2 text-sm hover:bg-neutral-100 transition-colors duration-200 inline-block"
                     >
-                      Contact
+                      {dictionary.navigation.links.contact}
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/about"
+                      href={`/${locale}/about`}
                       onClick={() => setIsOpen(false)}
                       className="w-full py-2 inline-block text-sm pl-4 hover:bg-neutral-100 transition-colors duration-200"
                     >
-                      About
+                      {dictionary.navigation.links.about}
                     </Link>
                   </li>
-                  <AuthLinks isMobileView onSetIsOpen={setIsOpen} />
+                  <AuthLinks
+                    locale={locale}
+                    dictionary={dictionary}
+                    isMobileView
+                    onSetIsOpen={setIsOpen}
+                  />
                 </div>
 
                 {/* DESKTOP NAVIGATION */}
                 <div className="md:flex hidden items-center gap-4">
                   <li>
-                    <Link href="/contact">Contact</Link>
+                    <Link href={`/${locale}/contact`}>{dictionary.navigation.links.contact}</Link>
                   </li>
                   <li>
-                    <Link href="/about">About</Link>
+                    <Link href={`/${locale}/about`}>{dictionary.navigation.links.about}</Link>
                   </li>
-                  <AuthLinks onSetIsOpen={setIsOpen} />
+                  <AuthLinks locale={locale} dictionary={dictionary} onSetIsOpen={setIsOpen} />
                 </div>
               </ul>
             </nav>
@@ -83,4 +88,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default Header;

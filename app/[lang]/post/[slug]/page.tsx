@@ -11,8 +11,12 @@ export const generateStaticParams = async () => {
   }));
 };
 
-export default async function SinglePostPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function SinglePostPage({
+  params,
+}: {
+  params: { slug: string; lang: string };
+}) {
+  const { slug, lang } = params;
 
   const { post } = await getSinglePost(slug);
   console.log("post.user.name: ", post.user.name);
@@ -21,9 +25,9 @@ export default async function SinglePostPage({ params }: { params: { slug: strin
   if (!post) notFound();
 
   return (
-    <Container>
+    <Container locale={lang}>
       <div className="space-y-10">
-        <PostHero post={post} />
+        <PostHero locale={lang} post={post} />
 
         <div className="flex flex-col md:flex-row gap-10">
           {/* SOCIAL SHARE */}
@@ -55,7 +59,7 @@ export default async function SinglePostPage({ params }: { params: { slug: strin
         </div>
 
         {/* COMMENTS */}
-        <Comments postSlug={slug} />
+        <Comments locale={lang} postSlug={slug} />
       </div>
     </Container>
   );

@@ -4,10 +4,11 @@ import Link from "next/link";
 
 type PostTagsProps = {
   post: Post;
+  locale: string;
   isSinglePostPage?: boolean;
 };
 
-const PostTags = ({ post, isSinglePostPage = false }: PostTagsProps) => {
+const PostTags = async ({ locale, post, isSinglePostPage = false }: PostTagsProps) => {
   return (
     <div
       className={`${
@@ -16,7 +17,7 @@ const PostTags = ({ post, isSinglePostPage = false }: PostTagsProps) => {
     >
       {/* CATEGORY */}
       <Link
-        href={`${post.catSlug === "cities" ? "/cities" : "/experiences"}`}
+        href={`${post.catSlug === "cities" ? `/${locale}/cities` : `/${locale}/experiences`}`}
         className={`font-medium capitalize ${
           post.catSlug === "cities" ? "text-emerald-600" : "text-indigo-600"
         }`}
@@ -30,11 +31,11 @@ const PostTags = ({ post, isSinglePostPage = false }: PostTagsProps) => {
 
       {/* READING DURATION */}
       <div className="w-2 h-2 rounded-full bg-neutral-200" />
-      <div>{getReadingTime(post.body)}</div>
+      <div>{getReadingTime(post.body, locale)}</div>
 
       {/* PUBLISH TIME */}
       <div className="w-2 h-2 rounded-full bg-neutral-200" />
-      <div>{getRelativeDate(post.createdAt)}</div>
+      <div>{getRelativeDate(post.createdAt, locale)}</div>
     </div>
   );
 };

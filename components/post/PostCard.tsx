@@ -4,14 +4,16 @@ import Image from "next/image";
 
 type PostProps = {
   post: Post;
+  locale: string;
   layout?: "horizontal" | "vertical";
   reverse?: boolean;
 };
 
-const PostCard = ({ post, layout = "horizontal", reverse = false }: PostProps) => {
+const PostCard = ({ post, locale, layout = "horizontal", reverse = false }: PostProps) => {
   return (
     <div
       key={post.id}
+      style={{ direction: locale === "fa" ? "rtl" : "ltr" }}
       className={`@container ${
         layout === "horizontal"
           ? "grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
@@ -24,14 +26,13 @@ const PostCard = ({ post, layout = "horizontal", reverse = false }: PostProps) =
         alt={post.title}
         width={600}
         height={300}
-        priority={true}
         className={`${
           reverse ? "md:order-last" : ""
         } rounded-md w-full object-cover object-center max-h-[300px] h-full`}
       />
 
       {/* CONTENT */}
-      <PostContent post={post} />
+      <PostContent locale={locale} post={post} />
     </div>
   );
 };

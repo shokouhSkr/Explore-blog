@@ -1,18 +1,22 @@
 import { Post } from "@/types";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import PostTags from "./PostTags";
 import Link from "next/link";
+import { getDictionary } from "@/helpers/utils";
 
 type PostContentProps = {
   post: Post;
+  locale: string;
   isSinglePostPage?: boolean;
 };
 
-const PostContent = ({ post, isSinglePostPage = false }: PostContentProps) => {
+const PostContent = async ({ post, locale, isSinglePostPage = false }: PostContentProps) => {
+  const dictionary = await getDictionary(locale);
+
   return (
     <div className="space-y-2">
       {/* TAGS */}
-      <PostTags isSinglePostPage post={post} />
+      <PostTags locale={locale} isSinglePostPage post={post} />
 
       {/* TITLE */}
       <h2
@@ -32,8 +36,9 @@ const PostContent = ({ post, isSinglePostPage = false }: PostContentProps) => {
 
       {/* READ MORE */}
       {!isSinglePostPage && (
-        <Link href={`/post/${post.slug}`} className="flex items-center gap-2 pt-2">
-          Read More <ArrowRight size={14} />
+        <Link href={`/${locale}/post/${post.slug}`} className="flex items-center gap-2 pt-2">
+          {dictionary.buttons.readMore}{" "}
+          {locale === "fa" ? <ArrowLeft size={14} /> : <ArrowRight size={14} />}
         </Link>
       )}
     </div>

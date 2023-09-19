@@ -2,10 +2,10 @@ import { Post } from "@/types";
 import { PostContent } from "..";
 import Image from "next/image";
 
-const PostHero = ({ post }: { post: Post }) => {
+const PostHero = ({ post, locale }: { post: Post; locale: string }) => {
   return (
     <div>
-      <PostContent isSinglePostPage post={post} />
+      <PostContent locale={locale} isSinglePostPage post={post} />
       <Image
         src={post.image}
         alt={post.title}

@@ -6,10 +6,12 @@ import { signOut, useSession } from "next-auth/react";
 
 type AuthLinksProps = {
   isMobileView?: boolean;
+  dictionary: any;
+  locale: string;
   onSetIsOpen: Dispatch<SetStateAction<boolean>> | null;
 };
 
-const AuthLinks = ({ isMobileView, onSetIsOpen }: AuthLinksProps) => {
+const AuthLinks = ({ isMobileView, locale, dictionary, onSetIsOpen }: AuthLinksProps) => {
   const { status } = useSession();
 
   return (
@@ -17,7 +19,7 @@ const AuthLinks = ({ isMobileView, onSetIsOpen }: AuthLinksProps) => {
       {status === "unauthenticated" && (
         <li>
           <Link
-            href="/login"
+            href={`/${locale}/login`}
             onClick={() => {
               if (!onSetIsOpen) return;
               onSetIsOpen(false);
@@ -27,7 +29,7 @@ const AuthLinks = ({ isMobileView, onSetIsOpen }: AuthLinksProps) => {
               "w-full py-2 inline-block pl-4 text-sm hover:bg-neutral-100 transition-colors duration-200"
             }`}
           >
-            Login
+            {dictionary.navigation.links.login}
           </Link>
         </li>
       )}
@@ -36,7 +38,7 @@ const AuthLinks = ({ isMobileView, onSetIsOpen }: AuthLinksProps) => {
         <>
           <li>
             <Link
-              href="/write"
+              href={`/${locale}/write`}
               onClick={() => {
                 if (!onSetIsOpen) return;
                 onSetIsOpen(false);
@@ -46,7 +48,7 @@ const AuthLinks = ({ isMobileView, onSetIsOpen }: AuthLinksProps) => {
                 "w-full py-2 inline-block pl-4 text-sm hover:bg-neutral-100 transition-colors duration-200"
               }`}
             >
-              Write
+              {dictionary.navigation.links.write}
             </Link>
           </li>
 
@@ -63,7 +65,7 @@ const AuthLinks = ({ isMobileView, onSetIsOpen }: AuthLinksProps) => {
               "w-full py-2 inline-block pl-4 text-sm hover:bg-neutral-100 transition-colors duration-200"
             } cursor-pointer`}
           >
-            Logout
+            {dictionary.navigation.links.logout}
           </span>
         </>
       )}

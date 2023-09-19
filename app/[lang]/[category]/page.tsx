@@ -1,7 +1,7 @@
 import { Container, Pagination, PostList } from "@/components";
 import prisma from "@/helpers/connect";
 import { POST_PER_PAGE } from "@/helpers/constants";
-import { getPaginatedPosts } from "@/helpers/utils";
+import { getCategories, getPaginatedPosts } from "@/helpers/utils";
 import { Category, Post } from "@/types";
 import { notFound } from "next/navigation";
 
@@ -25,7 +25,7 @@ export default async function CategoryPage({
   params,
   searchParams,
 }: {
-  params: { category: string };
+  params: { category: string; lang: string };
   searchParams: { page: number };
 }) {
   // Fetch and filter categories by slug
@@ -40,8 +40,10 @@ export default async function CategoryPage({
   });
 
   if (!category) notFound();
-  console.log("category: ", category.translation[0].title);
-  console.log("category: ", category.posts);
+
+  let translatedCategory;
+  if (params.lang === "fa") translatedCategory = category.translation[0];
+  if (params.lang === "en") translatedCategory = category;
 
   // Fetch filtered posts by category
   const page = Number(searchParams.page) || 1;
@@ -51,17 +53,19 @@ export default async function CategoryPage({
   );
 
   return (
-    <Container>
+    <Container locale={params.lang}>
       <div className="mb-10">
-        <h1 className="text-4xl mb-1 font-semibold">{category?.title}</h1>
-        <p className="text-lg text-neutral-600 dark:text-neutral-400">{category?.description}</p>
+        <h1 className="text-4xl mb-1 font-semibold">{translatedCategory?.title}</h1>
+        <p className="text-lg text-neutral-600 dark:text-neutral-400">
+          {translatedCategory?.description}
+        </p>
       </div>
 
       <div className="mb-24">
-        <PostList posts={posts} />
+        <PostList locale={params.lang} posts={posts} />
       </div>
 
-      {count > POST_PER_PAGE && <Pagination page={page} count={count} />}
+      {count > POST_PER_PAGE && <Pagination locale={params.lang} page={page} count={count} />}
     </Container>
   );
 }

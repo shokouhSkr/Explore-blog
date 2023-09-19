@@ -3,15 +3,16 @@ import { Container, SocialLink } from "@/components";
 import Link from "next/link";
 
 const { siteName, description, currentlyAt } = siteInfo;
-const Footer = () => {
+
+const Footer = ({ locale, dictionary }: { locale: string; dictionary: any }) => {
   return (
     <div className="py-6 border-t dark:border-t-neutral-600 mt-10">
-      <Container>
+      <Container locale={locale}>
         {/* NAME AND DESCRIPTION */}
         <div>
           <h2 className="text-3xl font-bold dark:text-neutral-100">{siteName}</h2>
           <p className="max-w-md text-neutral-700 mt-2 text-xl dark:text-neutral-400">
-            {description}
+            {dictionary.footer.description}
           </p>
         </div>
 
@@ -19,7 +20,9 @@ const Footer = () => {
         <div className="mt-6 flex-between flex-wrap gap-4">
           {/* LEFT */}
           <div>
-            <div className="font-medium text-lg">#exploretheworld</div>
+            <span dir="ltr" className="font-medium text-lg">
+              #exploretheworld
+            </span>
 
             <ul className="flex-between text-neutral-600 gap-3 mt-2">
               <SocialLink platform="twitter" link={siteInfo.socialLinks.twitter} />
@@ -32,7 +35,7 @@ const Footer = () => {
 
           {/* RIGHT */}
           <div>
-            <div className="text-sm text-neutral-400 mb-1">Currently At</div>
+            <div className="text-sm text-neutral-400 mb-1">{dictionary.footer.currentlyAtText}</div>
             <div className="px-3 py-2 shadow dark:text-neutral-800 rounded-md bg-white flex items-center gap-2">
               <div className="bg-emerald-400 rounded-full w-2 h-2" />
               {currentlyAt}
@@ -43,11 +46,15 @@ const Footer = () => {
         {/* COPYRIGHT */}
         <div className="py-3 border-t dark:border-t-neutral-600 flex-between gap-4 flex-wrap mt-6">
           <div className="text-sm text-neutral-400">
-            All rights are reserved | Copyright {new Date().getFullYear()}
+            {dictionary.footer.rightsText} {new Date().getFullYear()}
           </div>
           <div>
-            Made with love by{" "}
-            <Link href={siteInfo.socialLinks.twitter} className="underline underline-offset-4">
+            {dictionary.footer.creatorText}{" "}
+            <Link
+              dir="ltr"
+              href={siteInfo.socialLinks.twitter}
+              className="underline underline-offset-4"
+            >
               @shokouhSkr
             </Link>
           </div>
