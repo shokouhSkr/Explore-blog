@@ -69,11 +69,21 @@ model Post {
   image       String?
   views       Int    @default(0)
   catSlug     String
-  category    Category @relation(fields: [catSlug], references: [slug]) 
+  category    Category? @relation(fields: [catSlug], references: [slug]) 
   userEmail   String
   user        User @relation(fields:[userEmail], references: [email])
   comments    Comment[]
   body        String? 
+  translation PostTranslation[]
+}
+
+model PostTranslation {
+  id          String   @id @default(cuid()) @map("_id")
+  title       String?
+  description String?
+  body        String?
+  post        Post?     @relation(fields: [postId], references: [id])
+  postId      String
 }
 
 model Category {
@@ -82,13 +92,21 @@ model Category {
   title       String
   image       String?
   description String?
-  Posts       Post[] // to get these related data: include:{Posts:true}
+  posts       Post[] // to get these related data: include:{Posts:true}
+  translation CategoryTranslation[]
+}
+model CategoryTranslation {
+  id          String     @id @default(cuid()) @map("_id")
+  title       String?
+  description String?
+  category    Category?  @relation(fields: [categoryId], references: [id])
+  categoryId  String?
 }
 
 model Comment {
   id           String @id @default(cuid()) @map("_id")
   createdAt    DateTime @default(now())
-  description  String
+  description  String?
   userEmail    String
   user         User @relation(fields:[userEmail], references: [email])
   postSlug     String

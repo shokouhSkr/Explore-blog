@@ -2,7 +2,7 @@ import { Container, Pagination, PostList } from "@/components";
 import prisma from "@/helpers/connect";
 import { POST_PER_PAGE } from "@/helpers/constants";
 import { getPaginatedPosts } from "@/helpers/utils";
-import { Post } from "@/types";
+import { Category, Post } from "@/types";
 import { notFound } from "next/navigation";
 
 // The new getStaticPaths: It generates all versions of this page (cities and experiences) at built time.
@@ -33,10 +33,15 @@ export default async function CategoryPage({
     where: {
       slug: params.category,
     },
+    include: {
+      posts: true,
+      translation: true,
+    },
   });
 
   if (!category) notFound();
-  console.log("category: ", category);
+  console.log("category: ", category.translation[0].title);
+  console.log("category: ", category.posts);
 
   // Fetch filtered posts by category
   const page = Number(searchParams.page) || 1;
