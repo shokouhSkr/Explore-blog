@@ -10,11 +10,12 @@ const nextConfig = {
         hostname: "avatars.githubusercontent.com",
         protocol: "https",
       },
+      {
+        hostname: "s6.uupload.ir",
+        protocol: "https",
+      },
     ],
   },
-  /*  experimental: {
-    serverActions: true,
-  }, */
 };
 
 module.exports = nextConfig;

@@ -24,6 +24,7 @@ const PostCard = ({ post, layout = "horizontal", reverse = false }: PostProps) =
         alt={post.title}
         width={600}
         height={300}
+        priority={true}
         className={`${
           reverse ? "md:order-last" : ""
         } rounded-md w-full object-cover object-center max-h-[300px] h-full`}

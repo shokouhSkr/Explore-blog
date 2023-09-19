@@ -2,14 +2,32 @@ import readingTime from "reading-time";
 import { DateTime } from "luxon";
 import { Facebook, Twitter, Instagram, Youtube, Linkedin, Github } from "lucide-react";
 
-export const getReadingTime = (text: string) => {
-  return readingTime(text).text;
+/**************************************************/
+export const getReadingTime = (text: string, locale: string) => {
+  const minute = readingTime(text).minutes;
+  // Floor to 1 decimal place
+  const minutesRounded = Math.floor(minute);
+  if (locale === "fa") {
+    if (minutesRounded === 1) {
+      return `${minutesRounded.toLocaleString("fa-IR")} دقیقه`;
+    } else {
+      return `${minutesRounded.toLocaleString("fa-IR")} دقیقه`;
+    }
+  } else {
+    if (minutesRounded === 1) {
+      return `${minutesRounded} minute`;
+    } else {
+      return `${minutesRounded} minutes`;
+    }
+  }
 };
 
-export const getRelativeDate = (date: string) => {
-  return DateTime.fromISO(date).toRelative();
+/**************************************************/
+export const getRelativeDate = (date: string, locale: string) => {
+  return DateTime.fromISO(date).setLocale(locale).toRelative();
 };
 
+/**************************************************/
 export const getIcon = (platform: string) => {
   switch (platform) {
     case "facebook":
@@ -27,6 +45,7 @@ export const getIcon = (platform: string) => {
   }
 };
 
+/**************************************************/
 export const commentsFetcher = async (url: string) => {
   const res = await fetch(url);
 
@@ -39,7 +58,32 @@ export const commentsFetcher = async (url: string) => {
   return data;
 };
 
-/////////////////////////////////////////////////
+/**************************************************/
+const dictionaries = {
+  async getEn() {
+    return await import("../dictionaries/en.json");
+  },
+
+  async getFa() {
+    return await import("../dictionaries/fa.json");
+  },
+};
+
+export async function getDictionary(locale: string) {
+  if (!locale) {
+    const enDict = await dictionaries.getEn();
+    return enDict;
+  } else if (locale === "fa") {
+    const faDict = await dictionaries.getFa();
+    return faDict;
+  } else {
+    // Default to English
+    const enDict = await dictionaries.getEn();
+    return enDict;
+  }
+}
+
+/**************************************************/
 // PRISMA
 
 export const getCategories = async () => {
