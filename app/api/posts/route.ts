@@ -7,7 +7,7 @@ export const GET = async (req: NextRequest) => {
   try {
     const [posts, count] = await prisma.$transaction([
       prisma.post.findMany({
-        include: { user: true },
+        include: { user: true, translation: true },
       }),
       prisma.post.count(),
     ]);

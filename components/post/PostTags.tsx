@@ -17,9 +17,15 @@ const PostTags = async ({ locale, post, isSinglePostPage = false }: PostTagsProp
     >
       {/* CATEGORY */}
       <Link
-        href={`${post.catSlug === "cities" ? `/${locale}/cities` : `/${locale}/experiences`}`}
+        href={`${
+          post.catSlug === "cities" || post.catSlug === "شهرها"
+            ? `/${locale}/cities`
+            : `/${locale}/experiences`
+        }`}
         className={`font-medium capitalize ${
-          post.catSlug === "cities" ? "text-emerald-600" : "text-indigo-600"
+          post.catSlug === "cities" || post.catSlug === "شهرها"
+            ? "text-emerald-600"
+            : "text-indigo-600"
         }`}
       >
         {post.catSlug}

@@ -10,9 +10,19 @@ type PostProps = {
 };
 
 const PostCard = ({ post, locale, layout = "horizontal", reverse = false }: PostProps) => {
+  let translatedPost = post;
+  if (locale === "fa")
+    translatedPost = {
+      ...post,
+      title: post.translation[0].title,
+      description: post.translation[0].description,
+      body: post.translation[0].body,
+      catSlug: post.translation[0].catSlug,
+    };
+
   return (
     <div
-      key={post.id}
+      key={translatedPost.id}
       style={{ direction: locale === "fa" ? "rtl" : "ltr" }}
       className={`@container ${
         layout === "horizontal"
@@ -22,8 +32,8 @@ const PostCard = ({ post, locale, layout = "horizontal", reverse = false }: Post
     >
       {/* IMAGE */}
       <Image
-        src={post.image}
-        alt={post.title}
+        src={translatedPost.image}
+        alt={translatedPost.title}
         width={600}
         height={300}
         className={`${
@@ -32,7 +42,7 @@ const PostCard = ({ post, locale, layout = "horizontal", reverse = false }: Post
       />
 
       {/* CONTENT */}
-      <PostContent locale={locale} post={post} />
+      <PostContent locale={locale} post={translatedPost} />
     </div>
   );
 };

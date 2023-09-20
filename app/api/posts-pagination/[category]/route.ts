@@ -13,7 +13,7 @@ export const GET = async (req: NextRequest, { params }: { params: { category: st
     where: { catSlug: categorySlug },
     take: POST_PER_PAGE,
     skip: POST_PER_PAGE * (Number(page) - 1),
-    include: { user: true },
+    include: { user: true, translation: true },
   };
 
   try {

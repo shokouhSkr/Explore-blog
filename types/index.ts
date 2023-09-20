@@ -50,4 +50,5 @@ export type Post = {
   body: string;
   createdAt: string;
   user: User;
+  translation: Post[];
 };

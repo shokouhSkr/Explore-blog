@@ -3,13 +3,14 @@ import { Comments, Container, PostBody, PostHero, SocialLink } from "@/component
 import { getAllPosts, getSinglePost } from "@/helpers/utils";
 import { Post } from "@/types";
 
-export const generateStaticParams = async () => {
-  const { posts }: { posts: Post[] } = await getAllPosts();
+// FIX IT LIKE CATEGORIS
+// export const generateStaticParams = async () => {
+//   const { posts }: { posts: Post[] } = await getAllPosts();
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-};
+//   return posts.map((post) => ({
+//     slug: post.slug,
+//   }));
+// };
 
 export default async function SinglePostPage({
   params,
@@ -17,17 +18,25 @@ export default async function SinglePostPage({
   params: { slug: string; lang: string };
 }) {
   const { slug, lang } = params;
-
   const { post } = await getSinglePost(slug);
-  console.log("post.user.name: ", post.user.name);
 
   // You can use a not-found.tsx file for writing a custom not found page.
   if (!post) notFound();
 
+  let translatedPost = post;
+  if (lang === "fa")
+    translatedPost = {
+      ...post,
+      title: post.translation[0].title,
+      description: post.translation[0].description,
+      body: post.translation[0].body,
+      catSlug: post.translation[0].catSlug,
+    };
+
   return (
     <Container locale={lang}>
       <div className="space-y-10">
-        <PostHero locale={lang} post={post} />
+        <PostHero locale={lang} post={translatedPost} />
 
         <div className="flex flex-col md:flex-row gap-10">
           {/* SOCIAL SHARE */}
@@ -54,7 +63,7 @@ export default async function SinglePostPage({
 
           {/* POST BODY */}
           <div className="w-full mb-5 md:mb-10">
-            <PostBody body={post.body} />
+            <PostBody body={translatedPost.body} />
           </div>
         </div>
 

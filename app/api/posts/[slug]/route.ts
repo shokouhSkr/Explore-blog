@@ -10,7 +10,7 @@ export const GET = async (req: NextRequest, { params }: { params: { slug: string
       where: {
         slug,
       },
-      include: { user: true },
+      include: { user: true, translation: true },
     });
 
     return new NextResponse(JSON.stringify({ post, status: 200 }));

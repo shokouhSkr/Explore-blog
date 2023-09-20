@@ -84,6 +84,7 @@ model PostTranslation {
   body        String?
   post        Post?     @relation(fields: [postId], references: [id])
   postId      String
+  catSlug     String?
 }
 
 model Category {
