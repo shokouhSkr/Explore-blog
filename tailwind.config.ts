@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        iranyekan: ["iranyekan"],
+      },
       screens: {
         "2xs": "375px",
         xs: "425px",

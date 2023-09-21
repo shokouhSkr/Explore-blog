@@ -23,7 +23,7 @@ const SingleComment = ({ comment, locale }: { comment: Comment; locale: string }
       </div>
 
       {/* MESSAGE */}
-      <p className="text-neutral-600 dark:text-neutral-400">{comment.description}</p>
+      <p className="text-neutral-600 mr-[4.5rem] dark:text-neutral-400">{comment.description}</p>
     </div>
   );
 };

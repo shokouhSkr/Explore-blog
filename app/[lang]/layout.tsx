@@ -24,7 +24,10 @@ export default async function RootLayout({
 
   return (
     <html lang={lang} suppressHydrationWarning>
-      <body className={`${inter.className} dark:bg-neutral-800 bg-[#FAFAFA] dark:text-neutral-100`}>
+      <body
+        className={`${inter.className}
+         dark:bg-neutral-800 bg-[#FAFAFA] dark:text-neutral-100`}
+      >
         <Providers>
           <Header dictionary={dictionary} locale={lang} />
           <div className="pt-10">{children}</div>
