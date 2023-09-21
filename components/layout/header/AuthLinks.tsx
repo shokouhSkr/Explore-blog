@@ -35,39 +35,21 @@ const AuthLinks = ({ isMobileView, locale, dictionary, onSetIsOpen }: AuthLinksP
       )}
 
       {status === "authenticated" && (
-        <>
-          <li>
-            <Link
-              href={`/${locale}/write`}
-              onClick={() => {
-                if (!onSetIsOpen) return;
-                onSetIsOpen(false);
-              }}
-              className={`${
-                isMobileView &&
-                "w-full py-2 inline-block pl-4 text-sm hover:bg-neutral-100 transition-colors duration-200"
-              }`}
-            >
-              {dictionary.navigation.links.write}
-            </Link>
-          </li>
+        <span
+          onClick={() => {
+            if (!onSetIsOpen) return;
+            onSetIsOpen(false);
+            signOut();
 
-          <span
-            onClick={() => {
-              if (!onSetIsOpen) return;
-              onSetIsOpen(false);
-              signOut();
-
-              console.log(signOut);
-            }}
-            className={`${
-              isMobileView &&
-              "w-full py-2 inline-block pl-4 text-sm hover:bg-neutral-100 transition-colors duration-200"
-            } cursor-pointer`}
-          >
-            {dictionary.navigation.links.logout}
-          </span>
-        </>
+            console.log(signOut);
+          }}
+          className={`${
+            isMobileView &&
+            "w-full py-2 inline-block pl-4 text-sm hover:bg-neutral-100 transition-colors duration-200"
+          } cursor-pointer`}
+        >
+          {dictionary.navigation.links.logout}
+        </span>
       )}
     </>
   );

@@ -1,63 +1,42 @@
 "use client";
 
 import { useState } from "react";
-import { Image as ImageIcon, Link2, Minus, Plus, Video } from "lucide-react";
-import { ActionBtn } from "..";
 
-const PostForm = () => {
-  const [file, setFile] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
+const PostForm = ({ dictionary }: { dictionary: any }) => {
+  const [isHandling, setIsHandling] = useState(false);
 
   return (
     <form className="flex relative flex-col space-y-5">
-      {/* TITLE */}
+      {/* NAME */}
       <input
         type="text"
-        placeholder="Title"
-        className="p-4 shadow text-xl font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-neutral-400"
+        placeholder={dictionary.contact.form.name}
+        className="p-4 shadow rounded-md focus:outline-none focus:ring-1 focus:ring-neutral-400 placeholder:text-sm sm:placeholder:text-base placeholder:italic "
       />
 
-      {/* DESCRIPTION */}
+      {/* EMAIL */}
       <input
-        type="text"
-        placeholder="Description"
-        className="p-4 shadow rounded-md focus:outline-none focus:ring-1 focus:ring-neutral-400"
+        type="email"
+        placeholder={dictionary.contact.form.email}
+        className="p-4 shadow rounded-md focus:outline-none focus:ring-1 focus:ring-neutral-400 placeholder:text-sm sm:placeholder:text-base placeholder:italic "
       />
 
       {/* BODY */}
       <textarea
-        placeholder="Tell your story..."
+        placeholder={dictionary.contact.form.message}
         cols={30}
-        rows={15}
-        className="resize-none p-4 pt-20 shadow rounded-md focus:outline-none focus:ring-1 focus:ring-neutral-400"
+        rows={10}
+        className="resize-none p-4 shadow rounded-md focus:outline-none focus:ring-1 focus:ring-neutral-400 placeholder:text-sm placeholder:italic sm:placeholder:text-base"
       ></textarea>
 
       {/* PUBLISH BUTTON */}
       <div className="flex justify-end">
         <button
           type="button"
-          className="bg-green-700 text-neutral-100 w-full md:inline-block py-2 rounded-md hover:bg-green-800 active:bg-green-800 duration-200 md:w-24"
+          className="bg-green-700 text-neutral-100 w-full md:inline-block py-2 rounded-md hover:bg-green-800 active:bg-green-800 duration-200 md:w-28"
         >
-          Publish
+          {!isHandling ? `${dictionary.buttons.send}` : `${dictionary.buttons.sending}`}
         </button>
-      </div>
-
-      {/* ACTION BUTTONS */}
-      <div className="absolute top-[9.5rem] left-4 flex gap-6">
-        {/* PLUS BUTTON */}
-        <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          className="bg-slate-200 transition-colors duration-200 rounded-full w-10 h-10 active:bg-neutral-300 hover:bg-neutral-300 flex-center py-2"
-        >
-          {isOpen ? <Minus size={16} color="#444" /> : <Plus size={16} color="#444" />}
-        </button>
-
-        <div className={`${isOpen ? "flex" : "hidden"} items-center gap-2`}>
-          <ActionBtn icon={<ImageIcon size={16} color="#166534" />} id="image" />
-          <ActionBtn icon={<Video size={16} color="#166534" />} id="video" />
-          <ActionBtn icon={<Link2 size={16} color="#166534" />} id="link" />
-        </div>
       </div>
     </form>
   );

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { Comments, Container, PostBody, PostHero, SocialLink } from "@/components";
-import { getAllPosts, getSinglePost } from "@/helpers/utils";
+import { getAllPosts, getDictionary, getSinglePost } from "@/helpers/utils";
 import { Post } from "@/types";
 
 // FIX IT LIKE CATEGORIS
@@ -19,6 +19,7 @@ export default async function SinglePostPage({
 }) {
   const { slug, lang } = params;
   const { post } = await getSinglePost(slug);
+  const dictionary = await getDictionary(lang);
 
   // You can use a not-found.tsx file for writing a custom not found page.
   if (!post) notFound();
@@ -68,7 +69,7 @@ export default async function SinglePostPage({
         </div>
 
         {/* COMMENTS */}
-        <Comments locale={lang} postSlug={slug} />
+        <Comments locale={lang} postSlug={slug} dictionary={dictionary} />
       </div>
     </Container>
   );

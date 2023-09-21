@@ -18,7 +18,10 @@ const Header = ({ locale, dictionary }: { locale: string; dictionary: any }) => 
           <div className="flex-between py-5">
             {/* LOGO */}
             <div className="flex items-center gap-3">
-              <Link href={`/${locale}`} className="font-bold text-lg">
+              <Link
+                href={`/${locale}`}
+                className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-indigo-600"
+              >
                 Explorer
               </Link>
               <LangSwitcher locale={locale} />

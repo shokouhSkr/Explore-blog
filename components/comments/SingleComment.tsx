@@ -2,7 +2,12 @@ import Image from "next/image";
 import { Comment } from "@/types";
 import { getRelativeDate } from "@/helpers/utils";
 
-const SingleComment = ({ comment, locale }: { comment: Comment; locale: string }) => {
+type SingleCommentPropsType = {
+  comment: Comment;
+  locale: string;
+};
+
+const SingleComment = ({ comment, locale }: SingleCommentPropsType) => {
   return (
     <div key={comment.id} className="w-full py-6 space-y-4 text-base rounded-md outline-none">
       {/* AVATAR */}
@@ -23,7 +28,7 @@ const SingleComment = ({ comment, locale }: { comment: Comment; locale: string }
       </div>
 
       {/* MESSAGE */}
-      <p className="text-neutral-600 mr-[4.5rem] dark:text-neutral-400">{comment.description}</p>
+      <p className="text-neutral-600 mx-[4.5rem] dark:text-neutral-400">{comment.description}</p>
     </div>
   );
 };

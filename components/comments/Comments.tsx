@@ -7,7 +7,13 @@ import { useSession } from "next-auth/react";
 import { commentsFetcher } from "@/helpers/utils";
 import { Comment } from "@/types";
 
-const Comments = ({ postSlug, locale }: { postSlug: string; locale: string }) => {
+type CommentsPropsType = {
+  postSlug: string;
+  locale: string;
+  dictionary: any;
+};
+
+const Comments = ({ postSlug, locale, dictionary }: CommentsPropsType) => {
   const { status } = useSession();
   const { data, mutate, isLoading } = useSWR(`/api/comments?postSlug=${postSlug}`, commentsFetcher);
 
@@ -22,16 +28,18 @@ const Comments = ({ postSlug, locale }: { postSlug: string; locale: string }) =>
         {comments &&
           `${
             comments.length === 0
-              ? "Currently, there are no comments. Will you be the first?"
-              : `Comments (${comments.length})`
+              ? `${dictionary.comments["no-comment"]}`
+              : `${dictionary.comments.comments} (${comments.length})`
           }`}
       </span>
 
       {/* COMMENT AREA */}
-      {status === "authenticated" && <TextArea postSlug={postSlug} onMutate={mutate} />}
+      {status === "authenticated" && (
+        <TextArea dictionary={dictionary} postSlug={postSlug} onMutate={mutate} />
+      )}
       {status !== "authenticated" && (
         <div>
-          <Link href="/login">Login to write your comment.</Link>
+          <Link href="/login">{dictionary.comments["no-login"]}</Link>
         </div>
       )}
 

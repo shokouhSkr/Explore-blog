@@ -18,24 +18,3 @@ export const GET = async (req: NextRequest) => {
     return new NextResponse(JSON.stringify({ message: "Something went wrong!", status: 500 }));
   }
 };
-
-// Create a post
-export const POST = async (req: NextRequest) => {
-  const session = await getAuthSession();
-
-  if (!session) {
-    return new NextResponse(JSON.stringify({ message: "Not authenticated!", status: 401 }));
-  }
-
-  try {
-    const body = await req.json();
-    const post = await prisma.post.create({
-      data: { ...body, userEmail: session.user?.email },
-    });
-
-    return new NextResponse(JSON.stringify({ post, status: 201 }));
-  } catch (error) {
-    console.error(error);
-    return new NextResponse(JSON.stringify({ message: "Something went wrong!", status: 500 }));
-  }
-};

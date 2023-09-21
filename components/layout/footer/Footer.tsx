@@ -2,7 +2,7 @@ import { siteInfo } from "@/helpers/constants";
 import { Container, SocialLink } from "@/components";
 import Link from "next/link";
 
-const { siteName, description, currentlyAt } = siteInfo;
+const { siteName } = siteInfo;
 
 const Footer = ({ locale, dictionary }: { locale: string; dictionary: any }) => {
   return (
@@ -10,7 +10,9 @@ const Footer = ({ locale, dictionary }: { locale: string; dictionary: any }) => 
       <Container locale={locale}>
         {/* NAME AND DESCRIPTION */}
         <div>
-          <h2 className="text-3xl font-bold dark:text-neutral-100">{siteName}</h2>
+          <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-indigo-600">
+            {siteName}
+          </span>
           <p className="max-w-md text-neutral-700 mt-2 text-xl dark:text-neutral-400">
             {dictionary.footer.description}
           </p>
@@ -38,7 +40,7 @@ const Footer = ({ locale, dictionary }: { locale: string; dictionary: any }) => 
             <div className="text-sm text-neutral-400 mb-1">{dictionary.footer.currentlyAtText}</div>
             <div className="px-3 py-2 shadow dark:text-neutral-800 rounded-md bg-white flex items-center gap-2">
               <div className="bg-emerald-400 rounded-full w-2 h-2" />
-              {currentlyAt}
+              {dictionary.footer.location}
             </div>
           </div>
         </div>

@@ -11,12 +11,30 @@
     }
   },
   "buttons": {
-    "readMore": "Read More"
+    "readMore": "Read More",
+    "send": "Send",
+    "sending": "Sending..."
+  },
+  "comments": {
+    "comments": "Comments",
+    "no-comment": "Currently, there are no comments. Will you be the first?",
+    "placeholder": "Write your comment here...",
+    "no-login": "Login to write your comment."
+  },
+  "contact": {
+    "title": "Connect with us",
+    "message": "Have a Suggestion? Found an Issue? Want to Collaborate? We're All Ears!?",
+    "form": {
+      "name": "Your name",
+      "email": "Your email, so we can get back to you",
+      "message": "Leave your thoughts here..."
+    }
   },
   "ctaCard": {
     "title": "Explore the world with me!",
     "description": "Explore the world with me! I'm travelling around the 🌍. I've visited most of the great cities of 🇺🇸 and currently I'm travelling in 🇪🇺 Join me!",
-    "button": "Sign Up",
+    "signup": "Sign Up",
+    "signingup": "Signing up...",
     "placeholder": "Write your email.",
     "subscriberText1": "Join our",
     "subscriberText2": "subscribers now!"
@@ -25,6 +43,7 @@
     "description": "A minimal and lovely travel blog which shares experiences and citiest around the world!",
     "rightsText": "All rights are reserved | Copyright",
     "creatorText": "Created with ❤️ by",
-    "currentlyAtText": "Currently at"
+    "currentlyAtText": "Currently at",
+    "location": "Budapest"
   }
 }

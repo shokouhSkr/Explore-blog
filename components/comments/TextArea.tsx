@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 
-const TextArea = ({ postSlug, onMutate }: { postSlug: string; onMutate: () => void }) => {
+type TextAreaPropsType = {
+  dictionary: any;
+  postSlug: string;
+  onMutate: () => void;
+};
+
+const TextArea = ({ dictionary, postSlug, onMutate }: TextAreaPropsType) => {
   const [comment, setComment] = useState("");
   const [isHandling, setIsHandling] = useState(false);
 
@@ -28,7 +34,7 @@ const TextArea = ({ postSlug, onMutate }: { postSlug: string; onMutate: () => vo
         onChange={(e) => {
           setComment(e.target.value);
         }}
-        placeholder="Write your comment here..."
+        placeholder={dictionary.comments.placeholder}
         className="w-full p-4 resize-none text-base shadow rounded-md outline-none  placeholder:text-sm bg-white/80 dark:text-neutral-800"
       />
       <button
@@ -36,7 +42,7 @@ const TextArea = ({ postSlug, onMutate }: { postSlug: string; onMutate: () => vo
         onClick={submitHandler}
         className="px-3 py-2 rounded-md whitespace-nowrap hover:bg-neutral-950 active:bg-neutral-400/90 transition-all duration-200 bg-neutral-900 text-neutral-200"
       >
-        {!isHandling ? "Send" : "Sending..."}
+        {!isHandling ? `${dictionary.buttons.send}` : `${dictionary.buttons.sending}`}
       </button>
     </div>
   );
