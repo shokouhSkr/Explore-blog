@@ -129,3 +129,15 @@ export const getSinglePost = async (slug: string) => {
 
   return res.json();
 };
+
+export const getAllEmails = async () => {
+  const res = await fetch("http://localhost:3000/api/emails", {
+    cache: "no-cache",
+  });
+
+  if (!res.ok) {
+    throw new Error("getting single post failed!");
+  }
+
+  return res.json();
+};

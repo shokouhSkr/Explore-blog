@@ -3,26 +3,44 @@
 import { FormEvent, useState } from "react";
 import Image from "next/image";
 import ctaCardImg from "../../public/images/CTA-card.webp";
+import { getAllEmails } from "@/helpers/utils";
 
 const CTACard = ({ dictionary, locale }: { dictionary: any; locale: string }) => {
-  const [email, setEmail] = useState("");
-  const [emails, setEmails] = useState(152);
+  const [emailAddress, setEmailAddress] = useState("");
+  const [emailsCount, setEmailsCount] = useState(152);
   const [isHandling, setIsHandling] = useState(false);
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
+    setIsHandling(true);
 
     try {
-      setIsHandling(true);
-      // await directus.items("subscribers").createOne({
-      //   email,
-      // });
+      if (!emailAddress) return;
 
-      setEmail("");
-      setEmails((prev) => prev + 1);
+      const { email } = await getAllEmails();
+      const emailAddresses = email.map((e: any) => e.email);
+
+      if (emailAddresses.includes(emailAddress)) {
+        alert("already exists");
+        setEmailAddress("");
+        setIsHandling(false);
+      }
+
+      await fetch("/api/emails", {
+        method: "POST",
+        body: JSON.stringify({
+          email: emailAddress,
+        }),
+      });
+
+      setEmailAddress("");
+      setEmailsCount((prevCount) => prevCount + 1);
       setIsHandling(false);
+      // notif: sing up successfuly
     } catch (error) {
+      // notif: already exists
       console.log(error);
+      setEmailAddress("");
       setIsHandling(false);
     }
   };
@@ -48,9 +66,9 @@ const CTACard = ({ dictionary, locale }: { dictionary: any; locale: string }) =>
           <input
             type="email"
             name="email"
-            value={email}
+            value={emailAddress}
             onChange={(e) => {
-              setEmail(e.target.value);
+              setEmailAddress(e.target.value);
             }}
             placeholder={dictionary.ctaCard.placeholder}
             className="w-full px-3 py-2 text-base text-neutral-800 rounded-md outline-none md:w-auto placeholder:text-sm bg-white/80 focus:ring-2 ring-neutral-600"
@@ -67,7 +85,7 @@ const CTACard = ({ dictionary, locale }: { dictionary: any; locale: string }) =>
         <div className="mt-4">
           {dictionary.ctaCard.subscriberText1}{" "}
           <span className="px-2 py-1 text-sm rounded-md bg-neutral-700 text-neutral-100">
-            {emails}
+            {emailsCount}
           </span>{" "}
           {dictionary.ctaCard.subscriberText2}
         </div>
