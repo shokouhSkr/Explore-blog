@@ -113,3 +113,11 @@ model Comment {
   postSlug     String
   post         Post  @relation(fields:[postSlug], references: [slug])
 }
+
+model Message {
+  id           String @id @default(cuid()) @map("_id")
+  createdAt    DateTime @default(now())
+  name         String?
+  email        String?
+  message      String?
+}

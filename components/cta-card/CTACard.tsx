@@ -57,13 +57,12 @@ const CTACard = ({ dictionary, locale }: { dictionary: any; locale: string }) =>
           />
           <button
             type="submit"
-            className="px-3 py-2 hover:bg-neutral-800/90 active:bg-neutral-800/90 transition-all duration-200 rounded-md whitespace-nowrap bg-neutral-900 text-neutral-200"
+            className="px-3 py-2 hover:bg-neutral-800/90 active:bg-neutral-800/90 active:scale-[.98] transition-all duration-200 rounded-md whitespace-nowrap bg-neutral-900 text-neutral-200"
           >
             {!isHandling ? dictionary.ctaCard.signup : dictionary.ctaCard.signingup}
           </button>
         </form>
 
-        {/* Subscribers for Server Actions Approach */}
         {/* SUBSCRIBERS */}
         <div className="mt-4">
           {dictionary.ctaCard.subscriberText1}{" "}

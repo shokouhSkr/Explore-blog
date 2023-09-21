@@ -6,8 +6,8 @@ export default async function HomePage({ params }: { params: { lang: string } })
   const dictionary = await getDictionary(params.lang);
   const { posts }: { posts: Post[] } = await getAllPosts();
 
-  const cities: Post[] = posts?.filter((post) => post.catSlug === "cities");
-  const experiences: Post[] = posts?.filter((post) => post.catSlug === "experiences");
+  const cities: Post[] = posts.filter((post) => post.catSlug === "cities");
+  const experiences: Post[] = posts.filter((post) => post.catSlug === "experiences");
 
   return (
     <Container>
