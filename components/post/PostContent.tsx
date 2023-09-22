@@ -22,7 +22,7 @@ const PostContent = async ({ post, locale, isSinglePostPage = false }: PostConte
       <h2
         className={`${
           isSinglePostPage
-            ? "text-2xl md:text-3xl lg:text-4xl font-bold"
+            ? "text-2xl md:text-3xl lg:text-4xl font-semibold"
             : "text-xl @md:text-2xl @lg:text-3xl font-medium"
         } dark:text-neutral-100`}
       >
@@ -30,7 +30,7 @@ const PostContent = async ({ post, locale, isSinglePostPage = false }: PostConte
       </h2>
 
       {/* DESCRIPTION */}
-      <p className="text-base @lg:text-lg leading-snug text-neutral-600 dark:text-neutral-400">
+      <p className="text-lg @lg:text-xl leading-snug text-neutral-600 dark:text-neutral-400">
         {post.description}
       </p>
 

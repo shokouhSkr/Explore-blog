@@ -40,7 +40,7 @@ const TextArea = ({ dictionary, postSlug, onMutate }: TextAreaPropsType) => {
       <button
         type="button"
         onClick={submitHandler}
-        className="px-3 py-2 rounded-md whitespace-nowrap hover:bg-neutral-950 active:bg-neutral-400/90 transition-all duration-200 bg-neutral-900 text-neutral-200"
+        className="px-3 py-2 rounded-md whitespace-nowrap hover:bg-neutral-950 active:bg-neutral-950 transition-all duration-200 active:scale-[.98] bg-neutral-900 text-neutral-200"
       >
         {!isHandling ? `${dictionary.buttons.send}` : `${dictionary.buttons.sending}`}
       </button>

@@ -1,8 +1,8 @@
 import { Container, Pagination, PostList } from "@/components";
 import prisma from "@/helpers/connect";
 import { POST_PER_PAGE } from "@/helpers/constants";
-import { getCategories, getPaginatedPosts } from "@/helpers/utils";
-import { Category, Post } from "@/types";
+import { getPaginatedPosts } from "@/helpers/utils";
+import { Post } from "@/types";
 import { notFound } from "next/navigation";
 
 // The new getStaticPaths: It generates all versions of this page (cities and experiences) at built time.

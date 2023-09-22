@@ -43,7 +43,7 @@ export default async function SinglePostPage({
           {/* SOCIAL SHARE */}
           <div className="relative">
             <div className="sticky top-20 items-center flex md:flex-col gap-5">
-              <div className="font-medium md:hidden">Share this content:</div>
+              <div className="font-medium md:hidden">{dictionary.share.text}</div>
               <SocialLink
                 isShareURL
                 platform="facebook"

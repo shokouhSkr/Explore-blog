@@ -33,7 +33,7 @@ const Comments = ({ postSlug, locale, dictionary }: CommentsPropsType) => {
           }`}
       </span>
 
-      {/* COMMENT AREA */}
+      {/* COMMENT INPUT */}
       {status === "authenticated" && (
         <TextArea dictionary={dictionary} postSlug={postSlug} onMutate={mutate} />
       )}
@@ -45,7 +45,7 @@ const Comments = ({ postSlug, locale, dictionary }: CommentsPropsType) => {
 
       {/* COMMENTS LIST */}
       {comments.length > 0 && (
-        <div className="space-y-4">
+        <div className="space-y-2">
           {isLoading
             ? "Loading comments..."
             : typedComments?.map((comment) => (

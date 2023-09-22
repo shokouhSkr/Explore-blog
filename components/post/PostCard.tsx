@@ -26,9 +26,9 @@ const PostCard = ({ post, locale, layout = "horizontal", reverse = false }: Post
       style={{ direction: locale === "fa" ? "rtl" : "ltr" }}
       className={`@container ${
         layout === "horizontal"
-          ? "grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
-          : "space-y-10"
-      } `}
+          ? "grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10 items-center"
+          : "sm:space-y-10 space-y-6"
+      }`}
     >
       {/* IMAGE */}
       <Image

@@ -25,7 +25,7 @@ const PostTags = async ({ locale, post, isSinglePostPage = false }: PostTagsProp
         className={`font-medium capitalize ${
           post.catSlug === "cities" || post.catSlug === "شهرها"
             ? "text-emerald-600"
-            : "text-indigo-600"
+            : "text-indigo-500"
         }`}
       >
         {post.catSlug}

@@ -22,8 +22,8 @@
     "no-login": "Login to write your comment."
   },
   "contact": {
-    "title": "Connect with us",
-    "message": "Have a Suggestion? Found an Issue? Want to Collaborate? We're All Ears!?",
+    "title": "Connect with me",
+    "message": "Have a Suggestion? Found an Issue? Want to Collaborate? I'm All Ears!?",
     "form": {
       "name": "Your name",
       "email": "Your email, so we can get back to you",
@@ -38,6 +38,15 @@
     "placeholder": "Write your email.",
     "subscriberText1": "Join our",
     "subscriberText2": "subscribers now!"
+  },
+  "share": {
+    "text": "Share this content:"
+  },
+  "about": {
+    "title": "So, who am I?",
+    "text1": "Hey there! I'm a travel blogger who loves to explore new cities and have exciting adventures. I'm passionate about sharing my experiences with others and providing helpful travel tips and guides.",
+    "text2": "I believe that travel is one of the best ways to learn about the world and yourself, and I'm committed to responsible travel practices that minimize my impact on the environment and local communities.",
+    "text3": "I'm always happy to connect with fellow travelers and share stories and advice, so feel free to reach out and say hello!"
   },
   "footer": {
     "description": "A minimal and lovely travel blog which shares experiences and citiest around the world!",

@@ -46,9 +46,9 @@ const CTACard = ({ dictionary, locale }: { dictionary: any; locale: string }) =>
   };
 
   return (
-    <div className="relative px-6 py-10 overflow-hidden rounded-md bg-slate-100">
+    <div className="relative px-6 py-10 my-10 overflow-hidden rounded-md bg-slate-100">
       {/* OVERLAY */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-br from-white/95 dark:from-neutral-600/95 via-white/70 dark:via-neutral-600/70 to-white/30 dark:to-neutral-600/30" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-br from-white/95 dark:from-neutral-600/95 via-white/70 dark:via-gray-500/70 to-white/30 dark:to-gray-500/30" />
 
       {/* IMAGE */}
       <Image fill alt="CTA Card Image" className="object-cover object-center" src={ctaCardImg} />
@@ -58,7 +58,7 @@ const CTACard = ({ dictionary, locale }: { dictionary: any; locale: string }) =>
         <span dir="ltr" className="text-lg font-medium">
           #exploretheworld
         </span>
-        <h3 className="font-semibold mt-3 text-4xl">{dictionary.ctaCard.title}</h3>
+        <h3 className="font-semibold mt-3 text-3xl">{dictionary.ctaCard.title}</h3>
         <p className="max-w-lg mt-2 text-lg">{dictionary.ctaCard.description}</p>
 
         {/* CONTENT - FORM */}
@@ -71,7 +71,7 @@ const CTACard = ({ dictionary, locale }: { dictionary: any; locale: string }) =>
               setEmailAddress(e.target.value);
             }}
             placeholder={dictionary.ctaCard.placeholder}
-            className="w-full px-3 py-2 text-base text-neutral-800 rounded-md outline-none md:w-auto placeholder:text-sm bg-white/80 focus:ring-2 ring-neutral-600"
+            className="w-full px-3 py-2 text-base text-neutral-800 rounded-md outline-none md:w-auto placeholder:text-sm bg-white/80 focus:ring-2 ring-gray-500"
           />
           <button
             type="submit"
