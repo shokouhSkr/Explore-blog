@@ -15,7 +15,7 @@ export default async function HomePage({ params }: { params: { lang: string } })
         <PostCard locale={params.lang} post={cities?.[0]} />
         <PostList
           locale={params.lang}
-          posts={cities.filter((_, index) => index > 0 && index < 3)}
+          posts={cities?.filter((_, index) => index > 0 && index < 3)}
         />
 
         <CTACard locale={params.lang} dictionary={dictionary} />
@@ -23,7 +23,7 @@ export default async function HomePage({ params }: { params: { lang: string } })
         <PostCard locale={params.lang} reverse post={experiences?.[0]} />
         <PostList
           locale={params.lang}
-          posts={experiences.filter((_, index) => index > 0 && index < 3)}
+          posts={experiences?.filter((_, index) => index > 0 && index < 3)}
         />
       </main>
     </Container>

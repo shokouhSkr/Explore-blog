@@ -3,6 +3,8 @@
 import { Dispatch, SetStateAction } from "react";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
+import { toast } from "react-toastify";
+import { getAuthSession } from "@/helpers/auth";
 
 type AuthLinksProps = {
   isMobileView?: boolean;
@@ -13,6 +15,14 @@ type AuthLinksProps = {
 
 const AuthLinks = ({ isMobileView, locale, dictionary, onSetIsOpen }: AuthLinksProps) => {
   const { status } = useSession();
+
+  const logoutHandler = async () => {
+    if (!onSetIsOpen) return;
+    onSetIsOpen(false);
+    await signOut();
+
+    toast.success(dictionary.toasts.authentication.logout.successMessage);
+  };
 
   return (
     <>
@@ -36,13 +46,7 @@ const AuthLinks = ({ isMobileView, locale, dictionary, onSetIsOpen }: AuthLinksP
 
       {status === "authenticated" && (
         <span
-          onClick={() => {
-            if (!onSetIsOpen) return;
-            onSetIsOpen(false);
-            signOut();
-
-            console.log(signOut);
-          }}
+          onClick={logoutHandler}
           className={`${
             isMobileView &&
             "w-full py-2 inline-block pl-4 text-sm hover:bg-neutral-100 transition-colors duration-200"

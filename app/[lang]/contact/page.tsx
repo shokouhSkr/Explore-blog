@@ -1,16 +1,12 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Container, PostForm } from "@/components";
 import { getDictionary } from "@/helpers/utils";
 import { Send } from "lucide-react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
 export default function ContactPage({ params }: { params: { lang: string } }) {
   const [dictionary, setDictionary] = useState({} as any);
-  const { status } = useSession();
-  const router = useRouter();
 
   useEffect(() => {
     async function fetchDictionary() {
@@ -18,12 +14,7 @@ export default function ContactPage({ params }: { params: { lang: string } }) {
       setDictionary(dictionary);
     }
     fetchDictionary();
-  }, []);
-
-  if (status === "loading") return <Container>Loading...</Container>;
-  if (status === "unauthenticated") {
-    router.push("/");
-  }
+  }, [params.lang]);
 
   return (
     <Container locale={params.lang}>

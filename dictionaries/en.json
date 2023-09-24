@@ -42,6 +42,28 @@
   "share": {
     "text": "Share this content:"
   },
+  "toasts": {
+    "cta": {
+      "errorMessage": "This email already exists!",
+      "successMessage": "You're now subscribed!"
+    },
+    "message": {
+      "errorMessage": "Please fill out all fields before submitting.",
+      "successMessage": "Message sent successfully!"
+    },
+    "authentication": {
+      "login": {
+        "successMessage": "You're now logged in!"
+      },
+      "logout": {
+        "successMessage": "You're now logged out!"
+      }
+    },
+    "comment": {
+      "successMessage": "Thanks for your comment!"
+    },
+    "wrongMessage": "Request failed! Please try again."
+  },
   "about": {
     "title": "So, who am I?",
     "text1": "Hey there! I'm a travel blogger who loves to explore new cities and have exciting adventures. I'm passionate about sharing my experiences with others and providing helpful travel tips and guides.",

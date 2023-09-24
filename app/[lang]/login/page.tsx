@@ -1,16 +1,29 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Container } from "@/components";
-import { GithubIcon, Mail } from "lucide-react";
+import { GithubIcon } from "lucide-react";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { getDictionary } from "@/helpers/utils";
 
 export default function LoginPage({ params }: { params: { lang: string } }) {
   const { status } = useSession();
   const router = useRouter();
+  const [dictionary, setDictionary] = useState({} as any);
+
+  useEffect(() => {
+    async function fetchDictionary() {
+      const dictionary = await getDictionary(params.lang);
+      setDictionary(dictionary);
+    }
+    fetchDictionary();
+  }, [params.lang]);
 
   if (status === "loading") return <Container>Loading...</Container>;
   if (status === "authenticated") {
+    toast.success(dictionary.toasts.authentication.login.successMessage);
     router.push(`/${params.lang}`);
   }
 

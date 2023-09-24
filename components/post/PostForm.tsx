@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
 
 const PostForm = ({ dictionary }: { dictionary?: any }) => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -9,8 +10,14 @@ const PostForm = ({ dictionary }: { dictionary?: any }) => {
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
 
-    // notif: you have to fill all inputs
-    if (!formData.name || !formData.email || !formData.message) return;
+    if (!formData.name && !formData.email && !formData.message) {
+      return;
+    }
+
+    if (!formData.name || !formData.email || !formData.message) {
+      toast.error(dictionary.toasts.message.errorMessage);
+      return;
+    }
 
     setIsHandling(true);
     try {
@@ -23,9 +30,10 @@ const PostForm = ({ dictionary }: { dictionary?: any }) => {
         }),
       });
     } catch (error) {
-      console.log(error);
+      toast.error(dictionary.toasts.wrongMessage);
     }
-    // notif: send successfully
+
+    toast.success(dictionary.toasts.message.successMessage);
     setFormData({ name: "", email: "", message: "" });
     setIsHandling(false);
   };

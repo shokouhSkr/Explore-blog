@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import Image from "next/image";
 import ctaCardImg from "../../public/images/CTA-card.webp";
 import { getAllEmails } from "@/helpers/utils";
+import { toast } from "react-toastify";
 
 const CTACard = ({ dictionary, locale }: { dictionary: any; locale: string }) => {
   const [emailAddress, setEmailAddress] = useState("");
@@ -12,18 +13,19 @@ const CTACard = ({ dictionary, locale }: { dictionary: any; locale: string }) =>
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
-    setIsHandling(true);
 
     try {
       if (!emailAddress) return;
 
+      setIsHandling(true);
       const { email } = await getAllEmails();
       const emailAddresses = email.map((e: any) => e.email);
 
       if (emailAddresses.includes(emailAddress)) {
-        alert("already exists");
+        toast.error(dictionary.toasts.cta.errorMessage);
         setEmailAddress("");
         setIsHandling(false);
+        return;
       }
 
       await fetch("/api/emails", {
@@ -33,13 +35,12 @@ const CTACard = ({ dictionary, locale }: { dictionary: any; locale: string }) =>
         }),
       });
 
-      setEmailAddress("");
+      toast.success(dictionary.toasts.cta.successMessage);
       setEmailsCount((prevCount) => prevCount + 1);
+      setEmailAddress("");
       setIsHandling(false);
-      // notif: sing up successfuly
     } catch (error) {
-      // notif: already exists
-      console.log(error);
+      toast.error(dictionary.toasts.wrongMessage);
       setEmailAddress("");
       setIsHandling(false);
     }
