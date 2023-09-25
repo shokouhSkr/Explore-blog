@@ -13,28 +13,28 @@ export const generateMetadata = async ({ params }: { params: { category: string 
 };
 
 // The new getStaticPaths: It generates all versions of this page (cities and experiences) at built time.
-export const generateStaticParams = async () => {
-  try {
-    const categories = await prisma.category.findMany({
-      select: { slug: true },
-    });
+// export const generateStaticParams = async () => {
+//   try {
+//     const categories = await prisma.category.findMany({
+//       select: { slug: true },
+//     });
 
-    const params = categories?.map((category) => {
-      return { category: category.slug as string, locale: "en" };
-    });
+//     const params = categories?.map((category) => {
+//       return { category: category.slug as string, locale: "en" };
+//     });
 
-    const localizedParams = categories?.map((category) => {
-      return { category: category.slug as string, locale: "fa" };
-    });
+//     const localizedParams = categories?.map((category) => {
+//       return { category: category.slug as string, locale: "fa" };
+//     });
 
-    const allParams = params?.concat(localizedParams ?? []);
+//     const allParams = params?.concat(localizedParams ?? []);
 
-    return allParams || [];
-  } catch (error) {
-    console.log(error);
-    throw new Error("error generating params");
-  }
-};
+//     return allParams || [];
+//   } catch (error) {
+//     console.log(error);
+//     throw new Error("error generating params");
+//   }
+// };
 
 export default async function CategoryPage({
   params,

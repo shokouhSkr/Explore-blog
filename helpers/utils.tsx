@@ -104,7 +104,7 @@ export async function getDictionary(locale: string) {
 // PRISMA
 
 export const getCategories = async () => {
-  const res = await fetch("http:localhost:3000/api/categories", { cache: "no-cache" });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/categories`, { cache: "no-cache" });
 
   if (!res.ok) {
     throw new Error("getting categories failed!");
@@ -114,7 +114,7 @@ export const getCategories = async () => {
 };
 
 export const getAllPosts = async () => {
-  const res = await fetch(`http:localhost:3000/api/posts`, { cache: "no-cache" });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/posts`, { cache: "no-cache" });
 
   if (!res.ok) {
     throw new Error("getting posts failed!");
@@ -124,9 +124,12 @@ export const getAllPosts = async () => {
 };
 
 export const getPaginatedPosts = async (page: number, category: string) => {
-  const res = await fetch(`http:localhost:3000/api/posts-pagination/${category}?page=${page}`, {
-    cache: "no-cache",
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/posts-pagination/${category}?page=${page}`,
+    {
+      cache: "no-cache",
+    }
+  );
 
   if (!res.ok) {
     throw new Error("getting posts failed!");
@@ -136,7 +139,7 @@ export const getPaginatedPosts = async (page: number, category: string) => {
 };
 
 export const getSinglePost = async (slug: string) => {
-  const res = await fetch(`http:localhost:3000/api/posts/${slug}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/posts/${slug}`, {
     cache: "no-cache",
   });
 
