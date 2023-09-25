@@ -28,7 +28,7 @@ const CTACard = ({ dictionary, locale }: { dictionary: any; locale: string }) =>
         return;
       }
 
-      await fetch("/api/emails", {
+      await fetch(`${process.env.NEXT_PUBLIC_URL}/api/emails`, {
         method: "POST",
         body: JSON.stringify({
           email: emailAddress,
