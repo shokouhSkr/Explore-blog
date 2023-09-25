@@ -10,7 +10,6 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
     <SessionProvider>
       <ThemeProvider defaultTheme="dark" attribute="class">
         {children}
-
         <ToastContainer position="top-center" autoClose={1500} hideProgressBar theme="colored" />
       </ThemeProvider>
     </SessionProvider>

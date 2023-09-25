@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        iranyekan: ["iranyekan"],
+        iranyekan: ["var(--font-iranyekan)"],
       },
       screens: {
         "2xs": "375px",

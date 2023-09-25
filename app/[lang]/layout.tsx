@@ -1,13 +1,12 @@
 import "./globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 
+import { Inter } from "next/font/google";
 import { Footer, Header } from "@/components";
 import Providers from "../../providers/Providers";
 import { getDictionary } from "@/helpers/utils";
 import { siteInfo } from "@/helpers/constants";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-iranyekan" });
 
 export const generateMetadata = async ({ params: { lang } }: { params: { lang: string } }) => {
   const dictionary = await getDictionary(lang);
@@ -33,7 +32,7 @@ export default async function RootLayout({
   return (
     <html lang={lang} suppressHydrationWarning>
       <body
-        className={`${inter.className} font-iranyekan
+        className={`${inter.variable}
          dark:bg-neutral-800 bg-[#FAFAFA] dark:text-neutral-100`}
       >
         <Providers>
