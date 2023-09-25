@@ -151,7 +151,7 @@ export const getSinglePost = async (slug: string) => {
 };
 
 export const getAllEmails = async () => {
-  const res = await fetch("http://localhost:3000/api/emails", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/emails`, {
     cache: "no-cache",
   });
 
