@@ -11,23 +11,23 @@ export const generateMetadata = async ({ params }: { params: { slug: string } })
   };
 };
 
-export const generateStaticParams = async () => {
-  const posts = await prisma.post.findMany({
-    select: { slug: true },
-  });
+// export const generateStaticParams = async () => {
+//   const posts = await prisma.post.findMany({
+//     select: { slug: true },
+//   });
 
-  const params = posts?.map((post) => {
-    return { slug: post.slug as string, lang: "en" };
-  });
+//   const params = posts?.map((post) => {
+//     return { slug: post.slug as string, lang: "en" };
+//   });
 
-  const localizedParams = posts?.map((post) => {
-    return { slug: post.slug as string, lang: "fa" };
-  });
+//   const localizedParams = posts?.map((post) => {
+//     return { slug: post.slug as string, lang: "fa" };
+//   });
 
-  const allParams = params?.concat(localizedParams ?? []);
+//   const allParams = params?.concat(localizedParams ?? []);
 
-  return allParams || [];
-};
+//   return allParams || [];
+// };
 
 export default async function SinglePostPage({
   params,
