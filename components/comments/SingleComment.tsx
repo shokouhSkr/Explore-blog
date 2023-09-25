@@ -28,7 +28,13 @@ const SingleComment = ({ comment, locale }: SingleCommentPropsType) => {
       </div>
 
       {/* MESSAGE */}
-      <p className="text-neutral-600 mx-[4.7rem] dark:text-neutral-400">{comment.description}</p>
+      <p
+        className={`${
+          locale === "fa" ? "mr-[4.7rem]" : "ml-[4.7rem]"
+        } text-neutral-600 dark:text-neutral-400`}
+      >
+        {comment.description}
+      </p>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { getDictionary } from "@/helpers/utils";
+import Loading from "@/components/common/Loading";
 
 export default function LoginPage({ params }: { params: { lang: string } }) {
   const { status } = useSession();
@@ -21,7 +22,7 @@ export default function LoginPage({ params }: { params: { lang: string } }) {
     fetchDictionary();
   }, [params.lang]);
 
-  if (status === "loading") return <Container>Loading...</Container>;
+  if (status === "loading") return <Loading />;
   if (status === "authenticated") {
     toast.success(dictionary.toasts.authentication.login.successMessage);
     router.push(`/${params.lang}`);
