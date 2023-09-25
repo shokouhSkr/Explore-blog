@@ -1,9 +1,16 @@
 import { Container, Pagination, PostList } from "@/components";
 import prisma from "@/helpers/connect";
 import { POST_PER_PAGE } from "@/helpers/constants";
-import { getPaginatedPosts } from "@/helpers/utils";
+import { getCategories, getPaginatedPosts } from "@/helpers/utils";
 import { Post } from "@/types";
 import { notFound } from "next/navigation";
+
+// DYNAMIC METADATA
+export const generateMetadata = async ({ params }: { params: { category: string } }) => {
+  return {
+    title: params.category,
+  };
+};
 
 // The new getStaticPaths: It generates all versions of this page (cities and experiences) at built time.
 export const generateStaticParams = async () => {
@@ -12,9 +19,17 @@ export const generateStaticParams = async () => {
       select: { slug: true },
     });
 
-    return categories.map((category) => ({
-      category: category.slug,
-    }));
+    const params = categories?.map((category) => {
+      return { category: category.slug as string, locale: "en" };
+    });
+
+    const localizedParams = categories?.map((category) => {
+      return { category: category.slug as string, locale: "fa" };
+    });
+
+    const allParams = params?.concat(localizedParams ?? []);
+
+    return allParams || [];
   } catch (error) {
     console.log(error);
     throw new Error("error generating params");

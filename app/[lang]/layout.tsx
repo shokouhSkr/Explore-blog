@@ -5,12 +5,20 @@ import { Inter } from "next/font/google";
 import { Footer, Header } from "@/components";
 import Providers from "../../providers/Providers";
 import { getDictionary } from "@/helpers/utils";
+import { siteInfo } from "@/helpers/constants";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Explorer",
-  description: "shares experiences and cities around the world!",
+export const generateMetadata = async ({ params: { lang } }: { params: { lang: string } }) => {
+  const dictionary = await getDictionary(lang);
+
+  return {
+    title: {
+      template: siteInfo.siteName + " | %s", // if there is any title, next js puts it to %s
+      default: siteInfo.siteName,
+    },
+    description: dictionary.footer.description,
+  };
 };
 
 export default async function RootLayout({
@@ -25,7 +33,7 @@ export default async function RootLayout({
   return (
     <html lang={lang} suppressHydrationWarning>
       <body
-        className={`${inter.className}
+        className={`${inter.className} font-iranyekan
          dark:bg-neutral-800 bg-[#FAFAFA] dark:text-neutral-100`}
       >
         <Providers>

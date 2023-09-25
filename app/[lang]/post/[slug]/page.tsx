@@ -1,16 +1,33 @@
 import { notFound } from "next/navigation";
 import { Comments, Container, PostBody, PostHero, SocialLink } from "@/components";
-import { getAllPosts, getDictionary, getSinglePost } from "@/helpers/utils";
+import { getDictionary, getSinglePost, unslugify } from "@/helpers/utils";
 import { Post } from "@/types";
+import prisma from "@/helpers/connect";
 
-// FIX IT LIKE CATEGORIS
-// export const generateStaticParams = async () => {
-//   const { posts }: { posts: Post[] } = await getAllPosts();
+// DYNAMIC METADATA
+export const generateMetadata = async ({ params }: { params: { slug: string } }) => {
+  return {
+    title: unslugify(params.slug),
+  };
+};
 
-//   return posts.map((post) => ({
-//     slug: post.slug,
-//   }));
-// };
+export const generateStaticParams = async () => {
+  const posts = await prisma.post.findMany({
+    select: { slug: true },
+  });
+
+  const params = posts?.map((post) => {
+    return { slug: post.slug as string, lang: "en" };
+  });
+
+  const localizedParams = posts?.map((post) => {
+    return { slug: post.slug as string, lang: "fa" };
+  });
+
+  const allParams = params?.concat(localizedParams ?? []);
+
+  return allParams || [];
+};
 
 export default async function SinglePostPage({
   params,

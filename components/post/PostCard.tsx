@@ -1,3 +1,4 @@
+import { slugify } from "@/helpers/utils";
 import PostContent from "./PostContent";
 import { Post } from "@/types";
 import Image from "next/image";

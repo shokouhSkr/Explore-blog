@@ -59,6 +59,23 @@ export const commentsFetcher = async (url: string) => {
 };
 
 /**************************************************/
+export const slugify = (text: string) => {
+  return text
+    .trim()
+    .toLowerCase()
+    .replace(/ /g, "-") // Replace spaces with dashes
+    .replace(/[^\p{L}\p{N}\p{M}-]/gu, "") // Remove non-letter, non-number, non-mark characters except dashes
+    .replace(/--+/g, "-"); // Replace multiple dashes with a single dash
+};
+
+export const unslugify = (slug: string) => {
+  const words = slug.split("-"); // Split the slug into an array of words
+  const title = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+  // Capitalize the first letter of each word and join them with spaces
+  return title;
+};
+
+/**************************************************/
 const dictionaries = {
   async getEn() {
     return await import("../dictionaries/en.json");
